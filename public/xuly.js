@@ -4,7 +4,7 @@ class Hello extends React.Component {
       <div>
         <h3> Author: Quoc Hai </h3>
         <h1> Hello world ! </h1>
-        <h1> Click Button to Toggle ! </h1>
+        <h4> Click Button to Toggle ! </h4>
         <Toggle />
       </div>
     );

@@ -74,13 +74,15 @@ class Clock extends React.Component {
   }
   //ngay sau khi hàm render được gọi đến lần đầu tiên chạy xong
   //thì hàm componentDidMount sẽ được chạy
-  
+
   componentDidMount() {
     this.intervalID = setInterval(
       () => this.tick(),
       1000
     );
   }
+  //được gọi khi 1 component được loại bỏ khỏi DOM
+  //thực hiện các thao tác dọn dẹp, huỷ timer
   componentWillUnmount() {
     clearInterval(this.intervalID);
   }
@@ -100,8 +102,9 @@ class Clock extends React.Component {
 
 ReactDOM.render(
   <div>
+  <Clock />
   <Hello />
   <CountClick />
-  <Clock />
+
   </div>,
   document.getElementById("root"));

@@ -2,8 +2,8 @@ class Hello extends React.Component {
   render() {
     return (
       <div>
-        <h3> Author: Quoc Hai </h3>
         <h1> Hello world ! </h1>
+        <h3> Author: Quoc Hai </h3>
         <h4> Click Button to Toggle ! </h4>
         <Toggle />
       </div>
@@ -34,9 +34,74 @@ class Toggle extends React.Component {
     );
   }
 }
+class CountClick extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      Count: 0
+    }
+  }
+
+  AddClick(){
+    this.setState(state => ({
+      Count: this.state.Count + 1
+
+    }));
+  }
+  Reset(){
+    this.setState(state => ({
+      Count: 0
+    }));
+  }
+
+  render(){
+    return(
+      <div>
+        <p> So lan click: {this.state.Count} </p>
+        <button onClick={this.AddClick.bind(this)}>click me </button>
+        <button onClick={this.Reset.bind(this)}>reset </button>
+      </div>
+    );
+  }
+}
+
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      time: new Date().toLocaleString()
+    };
+  }
+  //ngay sau khi hàm render được gọi đến lần đầu tiên chạy xong
+  //thì hàm componentDidMount sẽ được chạy
+  
+  componentDidMount() {
+    this.intervalID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+  componentWillUnmount() {
+    clearInterval(this.intervalID);
+  }
+  tick() {
+    this.setState({
+      time: new Date().toLocaleString()
+    });
+  }
+  render() {
+    return (
+      <p className="App-clock">
+        The time is {this.state.time}.
+      </p>
+    );
+  }
+}
 
 ReactDOM.render(
   <div>
   <Hello />
+  <CountClick />
+  <Clock />
   </div>,
   document.getElementById("root"));
